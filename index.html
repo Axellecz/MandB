@@ -3,11 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Second chapter</title>
+  <title>Password Protected Redirect</title>
 </head>
 <body>
-  <a href="https://mega.nz/file/dfdA0ZrS#b8g2rM7tC3XLIfMPIU46X1vna7FUiymw2TGtHYWLUTM">
-    <img src="Monb.png" alt="Clickable Image">
+
+  <form id="passwordForm">
+    <label for="password">Enter Password:</label>
+    <input type="password" id="password" name="password">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Image with Link -->
+  <a href="#" id="imageLink">
+    <img src="your-image-file.jpg" alt="Clickable Image">
   </a>
+
+  <script>
+    document.getElementById("passwordForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      var password = document.getElementById("password").value;
+      
+      // Check if password is correct
+      if (password === "your_password_here") {
+        window.location.href = "https://www.your-destination-site.com";
+      } else {
+        alert("Incorrect password. Please try again.");
+      }
+    });
+  </script>
+
 </body>
 </html>
