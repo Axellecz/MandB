@@ -7,25 +7,20 @@
 </head>
 <body>
 
-  <form id="passwordForm">
-    <label for="password">Enter Password:</label>
-    <input type="password" id="password" name="password">
-    <button type="submit">Submit</button>
-  </form>
-
   <!-- Image with Link -->
   <a href="#" id="imageLink">
     <img src="Monb.png" alt="Clickable Image">
   </a>
 
   <script>
-    document.getElementById("passwordForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent form submission
+    document.getElementById("imageLink").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent default link behavior
       
-      var password = document.getElementById("password").value;
-      
+      // Prompt for password
+      var password = prompt("Enter Password:");
+
       // Check if password is correct
-      if (password === "1234") {
+      if (password === "123") {
         window.location.href = "https://mega.nz/file/dfdA0ZrS#b8g2rM7tC3XLIfMPIU46X1vna7FUiymw2TGtHYWLUTM";
       } else {
         alert("Incorrect password. Please try again.");
