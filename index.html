@@ -9,11 +9,14 @@
       font-family: Arial, sans-serif;
       background-color: #272730;
       color: #ffffff;
+      margin: 0;
+      padding: 0;
     }
     .thumbnail-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
       padding: 20px;
     }
     .thumbnail {
@@ -21,6 +24,7 @@
       cursor: pointer;
       transition: transform 0.2s;
       border: 1px solid black; /* Thin black border around each thumbnail */
+      margin: 1px; /* Small margin to separate thumbnails */
     }
     .thumbnail:hover {
       transform: scale(1.05);
