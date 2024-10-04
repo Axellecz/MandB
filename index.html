@@ -66,17 +66,6 @@
     .thumbnail:hover .thumbnail-description {
       opacity: 1;
     }
-    .link-tab {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #444;
-      border-radius: 8px;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      text-align: center;
-      word-wrap: break-word;
-    }
   </style>
 </head>
 <body>
@@ -84,12 +73,12 @@
   <!-- Thumbnails Container -->
   <div class="thumbnail-grid" id="thumbnailGrid">
     <!-- Thumbnail Example -->
-    <div class="thumbnail" data-link="https://mega.nz/folder/IOtnwZyB#H-rzZG39l2GBHLpnZmoJCA">
+    <div class="thumbnail" data-link="aHR0cHM6Ly9tZWdhLm56L2ZvbGRlci9JT3Rud1p5QiNILXJ6WkczOWwyR0JITHBuWm1vSkNB">
       <img src="new1.jpg" alt="Thumbnail 1">
       <div class="thumbnail-overlay"></div>
       <div class="thumbnail-description">img 1</div>
     </div>
-    <div class="thumbnail" data-link="https://mega.nz/folder/example1#abc123">
+    <div class="thumbnail" data-link="aHR0cHM6Ly9tZWdhLm56L2ZvbGRlci9leGFtcGxlMSNhYmMxMjM=">
       <img src="new2.jpg" alt="Thumbnail 2">
       <div class="thumbnail-overlay"></div>
       <div class="thumbnail-description">img 2</div>
@@ -97,6 +86,10 @@
   </div>
 
   <script>
+    function decodeBase64(encodedString) {
+      return atob(encodedString);
+    }
+
     document.getElementById("thumbnailGrid").addEventListener("click", function(event) {
       // Check if a thumbnail was clicked
       if (event.target.closest(".thumbnail")) {
@@ -108,18 +101,9 @@
         // Check if password is correct
         if (password === "new21") {
           var thumbnail = event.target.closest(".thumbnail");
-          var link = thumbnail.getAttribute("data-link");
-
-          // Check if the link tab already exists
-          if (!thumbnail.querySelector(".link-tab")) {
-            // Create a link tab
-            var linkTab = document.createElement("div");
-            linkTab.className = "link-tab";
-            linkTab.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
-
-            // Append the link tab to the thumbnail
-            thumbnail.appendChild(linkTab);
-          }
+          var encodedLink = thumbnail.getAttribute("data-link");
+          var link = decodeBase64(encodedLink);
+          window.location.href = link;
         } else {
           alert("Incorrect password. Please try again.");
         }
