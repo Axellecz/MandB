@@ -73,12 +73,12 @@
   <!-- Thumbnails Container -->
   <div class="thumbnail-grid" id="thumbnailGrid">
     <!-- Thumbnail Example -->
-    <div class="thumbnail" data-link="aHR0cHM6Ly9tZWdhLm56L2ZvbGRlci9JT3Rud1p5QiNILXJ6WkczOWwyR0JITHBuWm1vSkNB">
+    <div class="thumbnail" data-id="1">
       <img src="new1.jpg" alt="Thumbnail 1">
       <div class="thumbnail-overlay"></div>
       <div class="thumbnail-description">img 1</div>
     </div>
-    <div class="thumbnail" data-link="aHR0cHM6Ly9tZWdhLm56L2ZvbGRlci9leGFtcGxlMSNhYmMxMjM=">
+    <div class="thumbnail" data-id="2">
       <img src="new2.jpg" alt="Thumbnail 2">
       <div class="thumbnail-overlay"></div>
       <div class="thumbnail-description">img 2</div>
@@ -86,27 +86,36 @@
   </div>
 
   <script>
-    function decodeBase64(encodedString) {
-      return atob(encodedString);
-    }
-
     document.getElementById("thumbnailGrid").addEventListener("click", function(event) {
       // Check if a thumbnail was clicked
       if (event.target.closest(".thumbnail")) {
-        event.preventDefault(); // Prevent default action
+        event.preventDefault();
 
         // Prompt for password
-        var password = prompt("Enter Password:");
+        const password = prompt("Enter Password:");
 
-        // Check if password is correct
-        if (password === "new21") {
-          var thumbnail = event.target.closest(".thumbnail");
-          var encodedLink = thumbnail.getAttribute("data-link");
-          var link = decodeBase64(encodedLink);
-          window.location.href = link;
-        } else {
-          alert("Incorrect password. Please try again.");
-        }
+        // Send password to server for validation
+        const thumbnail = event.target.closest(".thumbnail");
+        const dataId = thumbnail.getAttribute("data-id");
+
+        fetch('/validate-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ password: password, id: dataId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = data.redirectUrl;
+          } else {
+            alert("Incorrect password. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
       }
     });
   </script>
