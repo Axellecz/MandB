@@ -56,7 +56,7 @@
       transform: translateX(-50%);
       padding: 5px;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: 16px;
+      font-size: 18px; /* Increased font size */
       font-weight: bold;
       color: #ffffff;
       z-index: 2;
@@ -94,11 +94,12 @@
         // Prompt for password
         const password = prompt("Enter Password:");
 
-        // Send password to server for validation
+        // Get the thumbnail element and its data-id attribute
         const thumbnail = event.target.closest(".thumbnail");
         const dataId = thumbnail.getAttribute("data-id");
 
-        fetch('/validate-password', {https://ellox.onrender.com
+        // Fetch request to the backend on Render for password validation
+        fetch('https://ellox.onrender.com/validate-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -108,7 +109,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            window.location.href = data.redirectUrl;
+            window.location.href = data.redirectUrl;  // Redirect if the password is correct
           } else {
             alert("Incorrect password. Please try again.");
           }
