@@ -6,34 +6,40 @@
   <title>M&B Thumbnails</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #272730;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background-color: #181818;
       color: #ffffff;
       margin: 0;
       padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
     .thumbnail-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;
-      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .thumbnail {
       position: relative;
+      overflow: hidden;
       cursor: pointer;
-      transition: transform 0.2s;
-      border: 1px solid black;
-      margin: 1px;
-    }
-    .thumbnail:hover {
-      transform: scale(1.05);
+      transition: transform 0.3s ease;
+      border-radius: 10px;
     }
     .thumbnail img {
-      width: 250px;
-      height: 354px;
-      border-radius: 8px;
-      object-fit: cover;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+    .thumbnail:hover img {
+      transform: scale(1.05);
     }
     .thumbnail-overlay {
       position: absolute;
@@ -41,27 +47,23 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.3s ease;
     }
     .thumbnail:hover .thumbnail-overlay {
       opacity: 1;
     }
     .thumbnail-description {
       position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 5px;
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: 18px; /* Increased font size */
+      bottom: 20px;
+      left: 20px;
+      font-size: 16px;
       font-weight: bold;
       color: #ffffff;
       z-index: 2;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.3s ease;
     }
     .thumbnail:hover .thumbnail-description {
       opacity: 1;
@@ -87,18 +89,13 @@
 
   <script>
     document.getElementById("thumbnailGrid").addEventListener("click", function(event) {
-      // Check if a thumbnail was clicked
       if (event.target.closest(".thumbnail")) {
         event.preventDefault();
 
-        // Prompt for password
         const password = prompt("Enter Password:");
-
-        // Get the thumbnail element and its data-id attribute
         const thumbnail = event.target.closest(".thumbnail");
         const dataId = thumbnail.getAttribute("data-id");
 
-        // Fetch request to the backend on Render for password validation
         fetch('https://ellox.onrender.com/validate-password', {
           method: 'POST',
           headers: {
@@ -109,7 +106,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            window.location.href = data.redirectUrl;  // Redirect if the password is correct
+            window.location.href = data.redirectUrl;
           } else {
             alert("Incorrect password. Please try again.");
           }
