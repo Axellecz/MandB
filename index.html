@@ -12,18 +12,48 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
+
+    /* Header styling */
+    .header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .header .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .header .links {
+      font-size: 14px;
+    }
+    .header .links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.3s ease;
+    }
+    .header .links a:hover {
+      color: #1db954; /* ArtStation-style green on hover */
+    }
+
     .thumbnail-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 16px;
-      padding: 40px;
+      padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .thumbnail {
       position: relative;
       overflow: hidden;
@@ -31,6 +61,7 @@
       transition: transform 0.3s ease;
       border-radius: 10px;
     }
+
     .thumbnail img {
       width: 100%;
       height: auto;
@@ -38,9 +69,11 @@
       transition: transform 0.3s ease;
       display: block;
     }
+
     .thumbnail:hover img {
       transform: scale(1.05);
     }
+
     .thumbnail-overlay {
       position: absolute;
       top: 0;
@@ -51,9 +84,11 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+
     .thumbnail:hover .thumbnail-overlay {
       opacity: 1;
     }
+
     .thumbnail-description {
       position: absolute;
       bottom: 20px;
@@ -65,12 +100,22 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+
     .thumbnail:hover .thumbnail-description {
       opacity: 1;
     }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="name">M&B Thumbnails</div>
+    <div class="links">
+      <a href="#">Resume</a>
+      <a href="https://www.patreon.com" target="_blank">Patreon</a>
+    </div>
+  </header>
 
   <!-- Thumbnails Container -->
   <div class="thumbnail-grid" id="thumbnailGrid">
