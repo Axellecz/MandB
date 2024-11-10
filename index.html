@@ -81,8 +81,8 @@
     .thumbnail-description {
       position: absolute;
       bottom: 10px;
-      left: 50px;
-      transform: translateX(-50%);
+      left: 0px;
+      right: 0;
       padding: 10px;
       font-family: Helvetica, Arial, sans-serif;
       font-size: 18px;
@@ -91,9 +91,9 @@
       z-index: 2;
       opacity: 0;
       transition: opacity 0.2s;
-      text-align: left;
-      width: 90%;
-      word-wrap: break-word;
+      text-align: center;
+      overflow: hidden;
+      white-space: normal;
     }
 
     .thumbnail:hover .thumbnail-description {
