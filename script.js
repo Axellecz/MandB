@@ -1,16 +1,18 @@
-// How many pages are in the chapter
-const totalPages = 10; // Change this to however many pages you have
-const chapterFolder = "chapter-1"; // Folder name
+const container = document.getElementById("manga-container");
 
-const container = document.getElementById("manga-pages");
+// Placeholder: set total pages when images are added
+const totalPages = 0; // Update this to how many images you have
+const imageFolder = "manga-pages"; // Folder where your images will go
 
-for (let i = 1; i <= totalPages; i++) {
-  const img = document.createElement("img");
-  
-  // Pad page numbers to 3 digits: 001, 002, etc.
-  const paddedNum = String(i).padStart(3, "0");
-  img.src = `${chapterFolder}/${paddedNum}.jpg`;
-  img.alt = `Page ${i}`;
-  
-  container.appendChild(img);
+if (totalPages === 0) {
+  console.log("No pages added yet.");
+} else {
+  container.innerHTML = ""; // Clear placeholder text
+  for (let i = 1; i <= totalPages; i++) {
+    const img = document.createElement("img");
+    const padded = String(i).padStart(3, "0"); // 001, 002...
+    img.src = `${imageFolder}/${padded}.jpg`;
+    img.alt = `Page ${i}`;
+    container.appendChild(img);
+  }
 }
