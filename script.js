@@ -2,7 +2,7 @@ const container = document.getElementById("manga-container");
 
 // Placeholder: set total pages when images are added
 const totalPages = 0; // Update this to how many images you have
-const imageFolder = "manga-pages"; // Folder where your images will go
+const imageFolder = "chapter-1"; // Folder where your images will go
 
 if (totalPages === 0) {
   console.log("No pages added yet.");
